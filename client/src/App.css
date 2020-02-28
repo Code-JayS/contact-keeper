@@ -305,7 +305,7 @@ input {
 }
 
 input[type='text'],
-input[type='email'],
+input[type='lat'],
 input[type='password'],
 input[type='date'],
 select,

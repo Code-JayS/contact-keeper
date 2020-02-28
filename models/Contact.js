@@ -9,11 +9,11 @@ const ContactSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
+  lat: {
     type: String,
     required: true
   },
-  phone: {
+  lng: {
     type: String
   },
   type: {

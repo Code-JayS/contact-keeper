@@ -6,7 +6,7 @@ const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
   const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
-  const { _id, name, email, phone, type } = contact;
+  const { _id, name, lat, lng, picUrl, type } = contact;
 
   const onDelete = () => {
     deleteContact(_id);
@@ -15,6 +15,7 @@ const ContactItem = ({ contact }) => {
 
   return (
     <div className='card bg-light'>
+      <img src={picUrl} alt= {name}/>
       <h3 className='text-primary text-left'>
         {name}{' '}
         <span
@@ -28,14 +29,14 @@ const ContactItem = ({ contact }) => {
         </span>
       </h3>
       <ul className='list'>
-        {email && (
+        {lat && (
           <li>
-            <i className='fas fa-envelope-open' /> {email}
+            <i className='fas fa-envelope-open' /> {lat}
           </li>
         )}
-        {phone && (
+        {lng && (
           <li>
-            <i className='fas fa-phone' /> {phone}
+            <i className='fas fa-lng' /> {lng}
           </li>
         )}
       </ul>
