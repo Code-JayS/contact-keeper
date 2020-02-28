@@ -1,42 +1,42 @@
 import React, { useState, useContext, useEffect } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const ContactForm = () => {
-  const contactContext = useContext(ContactContext);
+const PinForm = () => {
+  const pinContext = useContext(PinContext);
 
-  const { addContact, updateContact, clearCurrent, current } = contactContext;
+  const { addPin, updatePin, clearCurrent, current } = pinContext;
 
   useEffect(() => {
     if (current !== null) {
-      setContact(current);
+      setPin(current);
     } else {
-      setContact({
+      setPin({
         name: '',
         lat: '',
         lng: '',
         type: 'trash'
       });
     }
-  }, [contactContext, current]);
+  }, [pinContext, current]);
 
-  const [contact, setContact] = useState({
+  const [pin, setPin] = useState({
     name: '',
     lat: '',
     lng: '',
     type: 'trash'
   });
 
-  const { name, lat, lng, type } = contact;
+  const { name, lat, lng, picUrl, type } = pin;
 
   const onChange = e =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+    setPin({ ...pin, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
     if (current === null) {
-      addContact(contact);
+      addPin(pin);
     } else {
-      updateContact(contact);
+      updatePin(pin);
     }
     clearAll();
   };
@@ -48,11 +48,11 @@ const ContactForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <h2 className='text-primary'>
-        {current ? 'Edit Contact' : 'Add Contact'}
+        {current ? 'Edit Pin' : 'Add Pin'}
       </h2>
       <input
         type='text'
-        placeholder='Name'
+        placeholder='Description'
         name='name'
         value={name}
         onChange={onChange}
@@ -66,12 +66,19 @@ const ContactForm = () => {
       />
       <input
         type='text'
-        placeholder='Phone'
+        placeholder='lng'
         name='lng'
         value={lng}
         onChange={onChange}
       />
-      <h5>Contact Type</h5>
+      <input
+        type='text'
+        placeholder='picUrl'
+        name='picUrl'
+        value={picUrl}
+        onChange={onChange}
+      />
+      <h5>Pin Type</h5>
       <input
         type='radio'
         name='type'
@@ -79,7 +86,7 @@ const ContactForm = () => {
         checked={type === 'trash'}
         onChange={onChange}
       />{' '}
-      Personal{' '}
+      Trash{' '}
       <input
         type='radio'
         name='type'
@@ -87,11 +94,11 @@ const ContactForm = () => {
         checked={type === 'clean'}
         onChange={onChange}
       />{' '}
-      Professional
+      Clean
       <div>
         <input
           type='submit'
-          value={current ? 'Update Contact' : 'Add Contact'}
+          value={current ? 'Update Pin' : 'Add Pin'}
           className='btn btn-primary btn-block'
         />
       </div>
@@ -106,4 +113,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default PinForm;

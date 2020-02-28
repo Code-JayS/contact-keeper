@@ -1,44 +1,44 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import ContactItem from './ContactItem';
+import PinItem from './PinItem';
 import Spinner from '../layout/Spinner';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
-const Contacts = () => {
-  const contactContext = useContext(ContactContext);
+const Pins = () => {
+  const pinContext = useContext(PinContext);
 
-  const { contacts, filtered, getContacts, loading } = contactContext;
+  const { pins, filtered, getPins, loading } = pinContext;
 
   useEffect(() => {
-    getContacts();
+    getPins();
     // eslint-disable-next-line
   }, []);
 
-  if (contacts !== null && contacts.length === 0 && !loading) {
-    return <h4>Please add a contact</h4>;
+  if (pins !== null && pins.length === 0 && !loading) {
+    return <h4>Please add a pin</h4>;
   }
 
   return (
     <Fragment>
-      {contacts !== null && !loading ? (
+      {pins !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null
-            ? filtered.map(contact => (
+            ? filtered.map(pin => (
                 <CSSTransition
-                  key={contact._id}
+                  key={pin._id}
                   timeout={500}
                   classNames='item'
                 >
-                  <ContactItem contact={contact} />
+                  <PinItem pin={pin} />
                 </CSSTransition>
               ))
-            : contacts.map(contact => (
+            : pins.map(pin => (
                 <CSSTransition
-                  key={contact._id}
+                  key={pin._id}
                   timeout={500}
                   classNames='item'
                 >
-                  <ContactItem contact={contact} />
+                  <PinItem pin={pin} />
                 </CSSTransition>
               ))}
         </TransitionGroup>
@@ -49,4 +49,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Pins;

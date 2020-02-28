@@ -2,14 +2,14 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import ContactContext from '../../context/contact/contactContext';
+import PinContext from '../../context/pin/pinContext';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  const contactContext = useContext(ContactContext);
+  const pinContext = useContext(PinContext);
 
   const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { clearContacts } = contactContext;
+  const { clearPins } = pinContext;
 
   useEffect(() => {
     loadUser();
@@ -18,7 +18,7 @@ const Navbar = ({ title, icon }) => {
 
   const onLogout = () => {
     logout();
-    clearContacts();
+    clearPins();
   };
 
   const authLinks = (
@@ -62,8 +62,8 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
+  title: 'KC Cleanup',
+  icon: 'fas fa-map-marked-alt'
 };
 
 export default Navbar;

@@ -1,50 +1,50 @@
 import {
-  GET_CONTACTS,
-  ADD_CONTACT,
-  DELETE_CONTACT,
+  GET_PINS,
+  ADD_PIN,
+  DELETE_PIN,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_CONTACT,
-  FILTER_CONTACTS,
+  UPDATE_PIN,
+  FILTER_PINS,
   CLEAR_FILTER,
-  CONTACT_ERROR,
-  CLEAR_CONTACTS
+  PIN_ERROR,
+  CLEAR_PINS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_CONTACTS:
+    case GET_PINS:
       return {
         ...state,
-        contacts: action.payload,
+        pins: action.payload,
         loading: false
       };
-    case ADD_CONTACT:
+    case ADD_PIN:
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts],
+        pins: [action.payload, ...state.pins],
         loading: false
       };
-    case UPDATE_CONTACT:
+    case UPDATE_PIN:
       return {
         ...state,
-        contacts: state.contacts.map(contact =>
-          contact._id === action.payload._id ? action.payload : contact
+        pins: state.pins.map(pin =>
+          pin._id === action.payload._id ? action.payload : pin
         ),
         loading: false
       };
-    case DELETE_CONTACT:
+    case DELETE_PIN:
       return {
         ...state,
-        contacts: state.contacts.filter(
-          contact => contact._id !== action.payload
+        pins: state.pins.filter(
+          pin => pin._id !== action.payload
         ),
         loading: false
       };
-    case CLEAR_CONTACTS:
+    case CLEAR_PINS:
       return {
         ...state,
-        contacts: null,
+        pins: null,
         filtered: null,
         error: null,
         current: null
@@ -59,12 +59,12 @@ export default (state, action) => {
         ...state,
         current: null
       };
-    case FILTER_CONTACTS:
+    case FILTER_PINS:
       return {
         ...state,
-        filtered: state.contacts.filter(contact => {
+        filtered: state.pins.filter(pin => {
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return contact.name.match(regex) || contact.lat.match(regex);
+          return pin.name.match(regex) || pin.lat.match(regex);
         })
       };
     case CLEAR_FILTER:
@@ -72,7 +72,7 @@ export default (state, action) => {
         ...state,
         filtered: null
       };
-    case CONTACT_ERROR:
+    case PIN_ERROR:
       return {
         ...state,
         error: action.payload

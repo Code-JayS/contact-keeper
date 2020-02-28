@@ -5,7 +5,7 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  lat: {
+  email: {
     type: String,
     required: true,
     unique: true

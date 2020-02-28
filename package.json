@@ -1,7 +1,7 @@
 {
-  "name": "contact-keeper",
+  "name": "pin-keeper",
   "version": "1.0.0",
-  "description": "Contact manager app",
+  "description": "Pin manager app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
